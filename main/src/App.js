@@ -14,7 +14,17 @@ export class App extends Component {
   }
 
   render() {
-    return <div></div>;
+    return (
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Route exact path="/" render={} />
+            <Route path="/pokemons" render={} />
+            <Route path="/types" render={} />
+          </div>
+        </div>
+      </Router>
+    );
   }
 }
 
