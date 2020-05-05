@@ -1,4 +1,12 @@
-.App {
+.cards {
+  display: inline-block;
+  width: 250px;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 10px;
+}
+/*.App {
   text-align: center;
 }
 
@@ -36,3 +44,4 @@
     transform: rotate(360deg);
   }
 }
+*/
