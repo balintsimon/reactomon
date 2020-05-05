@@ -16,28 +16,23 @@ function PokemonDetail() {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
       .then((res) => {
-        console.log(res.data);
         setActualPokemon(res.data);
-
-        console.log(actualPokemon);
-
-        //setSprites(res.data.name);
-        console.log(sprites);
         setSprites(res.data.sprites);
-        console.log(sprites);
       })
       .then(axios.get)
       .then(console.log);
   }, []);
 
-  console.log(sprites.front_default);
-
   return (
     <div className="cards">
-      <p>Passed ID: {id}</p>
-      <p>Actual pokemon id: {actualPokemon.id}</p>
-      <p>{actualPokemon.name}</p>
       <img src={sprites.front_default} />
+      <p>
+        <b>{actualPokemon.name}</b>
+      </p>
+      <div>Id: {actualPokemon.id}</div>
+      <div>Height: {actualPokemon.height}</div>
+      <div>Weight: {actualPokemon.weight}</div>
+      <div>Base experience: {actualPokemon.base_experience}</div>
     </div>
   );
 }
