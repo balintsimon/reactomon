@@ -1,44 +1,45 @@
-import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-function componentDidMount(id) {
-  axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`).then((res) => {
-    console.log(res.data);
+function PokemonDetail() {
+  let { id } = useParams();
 
-    return (
-      <div>
-        <h3>ID: {id}</h3>
-      </div>
-    );
-  });
-}
+  const [actualPokemon, setActualPokemon] = useState({});
+  const [sprites, setSprites] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-export default class PokemonDetail extends Component {
-  state = {
-    actualPokemon: {},
-  };
+  //useEffect((1st argument: what to run after loading) => {whatever; return () => {cleanup function before every useEffect call} }, [2nd: array of dependencies, when to run again?]);
 
-  componentDidMount() {
-    console.log(this.props);
+  useEffect(() => {
+    //console.log(`fetching data from https://pokeapi.co/api/v2/pokemon/${id}/`);
     axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${this.props.params.id}/`)
+      .get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
       .then((res) => {
-        this.setState({ actualPokemon: res.data });
-      });
-  }
+        console.log(res.data);
+        setActualPokemon(res.data);
 
-  render() {
-    return (
-      <div className="cards">
-        <p>ID:</p>
-      </div>
-    );
-  }
+        console.log(actualPokemon);
+
+        //setSprites(res.data.name);
+        console.log(sprites);
+        setSprites(res.data.sprites);
+        console.log(sprites);
+      })
+      .then(axios.get)
+      .then(console.log);
+  }, []);
+
+  console.log(sprites.front_default);
+
+  return (
+    <div className="cards">
+      <p>Passed ID: {id}</p>
+      <p>Actual pokemon id: {actualPokemon.id}</p>
+      <p>{actualPokemon.name}</p>
+      <img src={sprites.front_default} />
+    </div>
+  );
 }
+
+export default PokemonDetail;
