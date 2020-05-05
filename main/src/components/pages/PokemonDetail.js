@@ -42,4 +42,4 @@ function PokemonDetail() {
   );
 }
 
-export default PokemonDetail;
+export default React.memo(PokemonDetail);
