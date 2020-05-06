@@ -19,22 +19,17 @@ const PokemonCard = (props) => {
       .then(console.log);
   }, []);
 
-  console.log(actualPokemon != null);
-  const { id, name, url } = props.pokemon;
-
-  if (actualPokemon !== null) {
-    return (
-      <div className="cards" key={actualPokemon.id}>
-        <p>{name}</p>
-        <img src={sprites.front_default} />
-        <br></br>
-        <Link
-          path={`/pokemon/` + actualPokemon.id}
-          render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
-        >{`Go to ${name}'s details page`}</Link>
-      </div>
-    );
-  }
+  return (
+    <div className="cards" key={actualPokemon.id}>
+      <p>{actualPokemon.name}</p>
+      <img src={sprites.front_default} />
+      <br></br>
+      <Link
+        path={`/pokemon/` + actualPokemon.id}
+        render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
+      >{`Go to ${actualPokemon.name}'s details page`}</Link>
+    </div>
+  );
 };
 
 PokemonCard.propTypes = {

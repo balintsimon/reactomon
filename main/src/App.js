@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
@@ -7,60 +7,56 @@ import PokemonList from "./components/pages/PokemonList";
 import TypeList from "./components/pages/TypeList";
 import PokemonDetail from "./components/pages/PokemonDetail";
 
-export class App extends Component {
-  state = {
-    pokemons: [{}],
-    types: [{}],
-  };
+const App = () => {
+  const [pokemons, setPokemons] = useState({});
+  const [types, setTypes] = useState({});
 
-  componentDidMount() {
+  useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10")
       .then((res) => {
-        this.setState({ pokemons: res.data.results });
+        setPokemons(res.data.results);
       });
 
     axios.get("https://pokeapi.co/api/v2/type").then((res) => {
-      this.setState({ types: res.data.results });
+      setTypes(res.data.results);
     });
-  }
+  }, []);
 
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <div className="container">
-            <Header />
-            <Route
-              exact
-              path="/"
-              render={(props) => <React.Fragment>Hello</React.Fragment>}
-            />
-            <Route
-              path="/types"
-              render={(props) => (
-                <div style={cardStyle}>
-                  <TypeList types={this.state.types}>Hello</TypeList>
-                </div>
-              )}
-            />
+  return (
+    <Router>
+      <div className="App">
+        <div className="container">
+          <Header />
+          <Route
+            exact
+            path="/"
+            render={(props) => <React.Fragment>Hello</React.Fragment>}
+          />
+          <Route
+            path="/types"
+            render={(props) => (
+              <div style={cardStyle}>
+                <TypeList types={types}>Hello</TypeList>
+              </div>
+            )}
+          />
 
-            <Route
-              exact
-              path="/pokemons"
-              render={(props) => (
-                <div style={cardStyle}>
-                  <PokemonList pokemons={this.state.pokemons} />
-                </div>
-              )}
-            />
-            <Route path="/pokemon/:id" children={<PokemonDetail />} />
-          </div>
+          <Route
+            exact
+            path="/pokemons"
+            render={(props) => (
+              <div style={cardStyle}>
+                <PokemonList pokemons={pokemons} />
+              </div>
+            )}
+          />
+          <Route path="/pokemon/:id" children={<PokemonDetail />} />
         </div>
-      </Router>
-    );
-  }
-}
+      </div>
+    </Router>
+  );
+};
 
 const cardStyle = {
   display: "flex",
