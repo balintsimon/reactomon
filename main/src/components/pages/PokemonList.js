@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PokemonCard from "./PokemonCard";
 import PropTypes from "prop-types";
 
