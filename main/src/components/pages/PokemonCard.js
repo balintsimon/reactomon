@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import InlineBlock from "react-inline-block";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import PokemonDetail from "./PokemonDetail";
@@ -10,22 +9,32 @@ const PokemonCard = (props) => {
   const [sprites, setSprites] = useState({});
 
   useEffect(() => {
-    axios.get(props.pokemon.url).then((res) => {
-      setActualPokemon(res.data);
-    });
+    axios
+      .get(props.pokemon.url)
+      .then((res) => {
+        setActualPokemon(res.data);
+        setSprites(res.data.sprites);
+      })
+      .then(axios.get)
+      .then(console.log);
   }, []);
 
+  console.log(actualPokemon != null);
   const { id, name, url } = props.pokemon;
-  return (
-    <div className="cards">
-      <p>{name}</p>
-      <Link
-        exact
-        path="/detail"
-        render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
-      >{`Go to ${name}'s details page`}</Link>
-    </div>
-  );
+
+  if (actualPokemon !== null) {
+    return (
+      <div className="cards" key={actualPokemon.id}>
+        <p>{name}</p>
+        <img src={sprites.front_default} />
+        <br></br>
+        <Link
+          path={`/pokemon/` + actualPokemon.id}
+          render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
+        >{`Go to ${name}'s details page`}</Link>
+      </div>
+    );
+  }
 };
 
 PokemonCard.propTypes = {
