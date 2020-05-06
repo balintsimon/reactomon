@@ -9,9 +9,12 @@ import TypeList from "./components/pages/TypeList";
 import PokemonDetail from "./components/pages/PokemonDetail";
 
 const theme = {
-  primary: "teal",
-  primaryButton: "teal",
-  secondaryButton: "green",
+  primary: "#fff",
+  background: "#333",
+  secondaryBackground: "#414141",
+
+  primaryButton: "#666",
+  secondaryButton: "#333",
 };
 
 const App = () => {

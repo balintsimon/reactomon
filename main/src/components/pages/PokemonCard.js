@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import PokemonDetail from "./PokemonDetail";
 import Button from "../../elements/Button";
 
@@ -21,16 +20,21 @@ const PokemonCard = (props) => {
       .then(console.log);
   }, []);
 
+  const path = `/pokemon/${actualPokemon.id}`;
+
   return (
     <div className="cards" key={actualPokemon.id}>
-      <p>{actualPokemon.name}</p>
+      <b>{actualPokemon.name}</b>
+      <br />
       <img src={sprites.front_default} />
       <br></br>
-      <Link
-        path={`/pokemon/` + actualPokemon.id}
-        render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
-      >{`Go to ${actualPokemon.name}'s details page`}</Link>
-      <Button>Go see {actualPokemon.name}</Button>
+
+      <Button to={path}>
+        <Link
+          to={path}
+          render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
+        >{`Go see ${actualPokemon.name}`}</Link>
+      </Button>
     </div>
   );
 };
