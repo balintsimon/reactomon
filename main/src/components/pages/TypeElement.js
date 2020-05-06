@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const TypeElement = (props) => {
   return props.types.map((type) => (
