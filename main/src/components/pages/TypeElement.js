@@ -5,7 +5,7 @@ const TypeElement = (props) => {
     <React.Fragment>
       <div
         className="cards"
-        key={type.index}
+        key={type.url}
         name={type.name}
         data-url={type.url}
       >

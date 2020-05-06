@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 const PokemonList = (props) => {
   return props.pokemons.map((pokemon) => (
-    <div key={pokemon.id} name={pokemon.name} data-url={pokemon.url}>
-      <PokemonCard pokemon={pokemon} />
+    <div key={pokemon.url} name={pokemon.name} data-url={pokemon.url}>
+      <PokemonCard pokemon={pokemon} key={pokemon.url} />
     </div>
   ));
 };

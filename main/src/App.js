@@ -60,7 +60,7 @@ const App = () => {
                 path="/pokemons"
                 render={(props) => (
                   <div style={cardStyle}>
-                    <PokemonList pokemons={pokemons} />
+                    <PokemonList pokemons={pokemons} key={pokemons} />
                   </div>
                 )}
               />
