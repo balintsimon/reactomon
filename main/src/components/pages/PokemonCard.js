@@ -1,39 +1,46 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import InlineBlock from "react-inline-block";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import PokemonDetail from "./PokemonDetail";
+import Button from "../../elements/Button";
 
-export default class PokemonCard extends Component {
-  state = {
-    actualPokemon: {},
-    sprites: {},
-  };
+const PokemonCard = (props) => {
+  const [actualPokemon, setActualPokemon] = useState({});
+  const [sprites, setSprites] = useState({});
 
-  componentDidMount() {
-    axios.get(this.props.pokemon.url).then((res) => {
-      this.setState({ actualPokemon: res.data });
-    });
-  }
+  useEffect(() => {
+    axios
+      .get(props.pokemon.url)
+      .then((res) => {
+        setActualPokemon(res.data);
+        setSprites(res.data.sprites);
+      })
+      .then(axios.get)
+      .then(console.log);
+  }, []);
 
-  render() {
-    const { id, name, url } = this.props.pokemon;
-    return (
-      <div className="cards">
-        <p>{name}</p>
+  const path = `/pokemon/${actualPokemon.id}`;
+
+  return (
+    <div className="cards" key={actualPokemon.id}>
+      <b>{actualPokemon.name}</b>
+      <br />
+      <img src={sprites.front_default} />
+      <br></br>
+
+      <Button to={path}>
         <Link
-          exact
-          path="/detail"
-          render={(props) => (
-            <PokemonDetail actualPokemon={this.state.actualPokemon} />
-          )}
-        >{`Go to ${name}'s details page`}</Link>
-      </div>
-    );
-  }
-}
+          to={path}
+          render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
+        >{`Go see ${actualPokemon.name}`}</Link>
+      </Button>
+    </div>
+  );
+};
 
 PokemonCard.propTypes = {
   name: PropTypes.string,
 };
+
+export default PokemonCard;

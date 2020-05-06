@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../../elements/Navbar";
 
 export default function Header() {
   return (
-    <header style={headerStyle}>
+    <Navbar>
       <h1>Pokemon</h1>
       <Link style={linkStyle} to="/">
         Home
@@ -16,15 +17,8 @@ export default function Header() {
       <Link style={linkStyle} to="/types">
         Types
       </Link>
-    </header>
+    </Navbar>
   );
 }
-
-const headerStyle = {
-  background: "#333",
-  color: "#fff",
-  textAlign: "center",
-  padding: "10px",
-};
 
 const linkStyle = { color: "#fff", textDecoration: "none" };

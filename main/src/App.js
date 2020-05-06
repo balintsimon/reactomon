@@ -1,38 +1,40 @@
-import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
+import styled, { ThemeProvider } from "styled-components";
 import "./App.css";
 import Header from "./components/layout/Header";
 import PokemonList from "./components/pages/PokemonList";
 import TypeList from "./components/pages/TypeList";
 import PokemonDetail from "./components/pages/PokemonDetail";
 
-export class App extends Component {
-  state = {
-    pokemons: [{}],
-    types: [{}],
-  };
+const theme = {
+  primary: "#fff",
+  background: "#333",
+  secondaryBackground: "#414141",
 
-  componentDidMount() {
+  primaryButton: "#666",
+  secondaryButton: "#333",
+};
+
+const App = () => {
+  const [pokemons, setPokemons] = useState({});
+  const [types, setTypes] = useState({});
+
+  useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10")
       .then((res) => {
-        this.setState({ pokemons: res.data.results });
+        setPokemons(res.data.results);
       });
 
     axios.get("https://pokeapi.co/api/v2/type").then((res) => {
-      this.setState({ types: res.data.results });
+      setTypes(res.data.results);
     });
-  }
+  }, []);
 
-  render() {
-    return (
+  return (
+    <ThemeProvider theme={theme}>
       <Router>
         <div className="App">
           <div className="container">
@@ -46,7 +48,7 @@ export class App extends Component {
               path="/types"
               render={(props) => (
                 <div style={cardStyle}>
-                  <TypeList types={this.state.types}>Hello</TypeList>
+                  <TypeList types={types}>Hello</TypeList>
                 </div>
               )}
             />
@@ -56,7 +58,7 @@ export class App extends Component {
               path="/pokemons"
               render={(props) => (
                 <div style={cardStyle}>
-                  <PokemonList pokemons={this.state.pokemons} />
+                  <PokemonList pokemons={pokemons} />
                 </div>
               )}
             />
@@ -64,9 +66,9 @@ export class App extends Component {
           </div>
         </div>
       </Router>
-    );
-  }
-}
+    </ThemeProvider>
+  );
+};
 
 const cardStyle = {
   display: "flex",
