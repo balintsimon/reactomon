@@ -29,12 +29,12 @@ const PokemonCard = (props) => {
       <img src={sprites.front_default} />
       <br></br>
 
-      <Button to={path}>
-        <Link
-          to={path}
-          render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
-        >{`Go see ${actualPokemon.name}`}</Link>
-      </Button>
+      <Link
+        to={path}
+        render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
+      >
+        <Button to={path}>{`Go see ${actualPokemon.name}`}</Button>
+      </Link>
     </div>
   );
 };
