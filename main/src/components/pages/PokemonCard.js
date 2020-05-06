@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import PokemonDetail from "./PokemonDetail";
+import Button from "../../elements/Button";
 
 const PokemonCard = (props) => {
   const [actualPokemon, setActualPokemon] = useState({});
@@ -28,6 +30,7 @@ const PokemonCard = (props) => {
         path={`/pokemon/` + actualPokemon.id}
         render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
       >{`Go to ${actualPokemon.name}'s details page`}</Link>
+      <Button>Go see {actualPokemon.name}</Button>
     </div>
   );
 };

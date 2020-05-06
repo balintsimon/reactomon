@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-function PokemonDetail() {
+const PokemonDetail = () => {
   let { id } = useParams();
 
   const [actualPokemon, setActualPokemon] = useState({});
@@ -35,6 +35,6 @@ function PokemonDetail() {
       <div>Base experience: {actualPokemon.base_experience}</div>
     </div>
   );
-}
+};
 
 export default React.memo(PokemonDetail);

@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
+import styled, { ThemeProvider } from "styled-components";
 import "./App.css";
 import Header from "./components/layout/Header";
 import PokemonList from "./components/pages/PokemonList";
 import TypeList from "./components/pages/TypeList";
 import PokemonDetail from "./components/pages/PokemonDetail";
+
+const theme = {
+  primary: "teal",
+  primaryButton: "teal",
+  secondaryButton: "green",
+};
 
 const App = () => {
   const [pokemons, setPokemons] = useState({});
@@ -24,37 +31,39 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
-      <div className="App">
-        <div className="container">
-          <Header />
-          <Route
-            exact
-            path="/"
-            render={(props) => <React.Fragment>Hello</React.Fragment>}
-          />
-          <Route
-            path="/types"
-            render={(props) => (
-              <div style={cardStyle}>
-                <TypeList types={types}>Hello</TypeList>
-              </div>
-            )}
-          />
+    <ThemeProvider theme={theme}>
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <Route
+              exact
+              path="/"
+              render={(props) => <React.Fragment>Hello</React.Fragment>}
+            />
+            <Route
+              path="/types"
+              render={(props) => (
+                <div style={cardStyle}>
+                  <TypeList types={types}>Hello</TypeList>
+                </div>
+              )}
+            />
 
-          <Route
-            exact
-            path="/pokemons"
-            render={(props) => (
-              <div style={cardStyle}>
-                <PokemonList pokemons={pokemons} />
-              </div>
-            )}
-          />
-          <Route path="/pokemon/:id" children={<PokemonDetail />} />
+            <Route
+              exact
+              path="/pokemons"
+              render={(props) => (
+                <div style={cardStyle}>
+                  <PokemonList pokemons={pokemons} />
+                </div>
+              )}
+            />
+            <Route path="/pokemon/:id" children={<PokemonDetail />} />
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 };
 
