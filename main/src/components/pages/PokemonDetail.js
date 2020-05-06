@@ -7,7 +7,7 @@ function PokemonDetail() {
 
   const [actualPokemon, setActualPokemon] = useState({});
   const [sprites, setSprites] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  //const [isLoading, setIsLoading] = useState(false);
 
   //useEffect((1st argument: what to run after loading) => {whatever; return () => {cleanup function before every useEffect call} }, [2nd: array of dependencies, when to run again?]);
 
