@@ -8,6 +8,7 @@ import PokemonList from "./components/pages/PokemonList";
 import TypeList from "./components/pages/TypeList";
 import PokemonDetail from "./components/pages/PokemonDetail";
 import { CatchedProvider } from "./CatchedContext";
+import CatchedPokemon from "./components/pages/CatchedPokemon";
 
 const theme = {
   primary: "#fff",
@@ -19,8 +20,8 @@ const theme = {
 };
 
 const App = () => {
-  const [pokemons, setPokemons] = useState({});
-  const [types, setTypes] = useState({});
+  const [pokemons, setPokemons] = useState([]);
+  const [types, setTypes] = useState([]);
 
   useEffect(() => {
     axios
@@ -65,6 +66,7 @@ const App = () => {
                 )}
               />
               <Route path="/pokemon/:id" children={<PokemonDetail />} />
+              <Route path="/catched" children={<CatchedPokemon />} />
             </div>
           </div>
         </Router>

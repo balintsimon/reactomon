@@ -15,15 +15,26 @@ const PokemonCard = (props) => {
   const catchNewPokemon = (e) => {
     e.preventDefault();
     setCatched(true);
-    setCatchedPokemon([
-      ...catchedPokemon,
-      {
-        name: actualPokemon.name,
-        id: actualPokemon.id,
-        path: path,
-        sprite: sprites.front_default,
-      },
-    ]);
+    if (catchedPokemon != undefined) {
+      setCatchedPokemon([
+        ...catchedPokemon,
+        {
+          name: actualPokemon.name,
+          id: actualPokemon.id,
+          path: path,
+          sprite: sprites.front_default,
+        },
+      ]);
+    } else {
+      setCatchedPokemon([
+        {
+          name: actualPokemon.name,
+          id: actualPokemon.id,
+          path: path,
+          sprite: sprites.front_default,
+        },
+      ]);
+    }
   };
 
   useEffect(() => {
@@ -58,7 +69,7 @@ const PokemonCard = (props) => {
         to={path}
         render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
       >
-        <Button to={path}>{`Go see ${actualPokemon.name}`}</Button>
+        <Button to={path}>Details</Button>
       </Link>
       {catchButton}
     </div>

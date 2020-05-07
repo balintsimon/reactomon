@@ -7,7 +7,7 @@ import { CatchedContext } from "../../CatchedContext";
 export default function Header() {
   const logCatchedPokemons = (e) => {
     catchedPokemon.map((Pokemon) => {
-      console.log(Pokemon.name);
+      console.log(Pokemon);
     });
   };
   const [catchedPokemon, setCatchedPokemon] = useContext(CatchedContext);
@@ -27,8 +27,8 @@ export default function Header() {
         Types
       </Link>{" "}
       |{" "}
-      <Link style={linkStyle} to="#">
-        <Button onClick={logCatchedPokemons}>Log Catched</Button>
+      <Link style={linkStyle} to="/catched">
+        <Button onClick={logCatchedPokemons}>Catched</Button>
       </Link>
     </Navbar>
   );
