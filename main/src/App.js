@@ -25,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10")
+      .get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=24")
       .then((res) => {
         setPokemons(res.data.results);
       });
