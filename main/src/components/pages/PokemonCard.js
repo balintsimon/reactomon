@@ -77,16 +77,22 @@ const PokemonCard = (props) => {
   }
 
   return (
-    <div
-      className="cards shadow-sm p-3 mb-5 bg-white rounded"
-      key={actualPokemon.id}
-    >
-      <h1 style={{ textTransform: "capitalize" }}>{actualPokemon.name}</h1>
-      <br />
-      <img src={sprites.front_default} />
-      <br></br>
-
-      <div class="container">
+    <div class="container">
+      <div
+        className="cards shadow-sm p-3 mb-5 bg-white rounded"
+        key={actualPokemon.id}
+      >
+        <div class="row">
+          <h1
+            style={{ textTransform: "capitalize" }}
+            class="col align-self-center"
+          >
+            {actualPokemon.name}
+          </h1>
+        </div>
+        <div class="row">
+          <img class="col align-self-center" src={sprites.front_default} />
+        </div>
         <div class="row">
           <div class="col align-self-start">
             <Link
