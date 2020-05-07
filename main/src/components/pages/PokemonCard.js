@@ -1,13 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import PokemonDetail from "./PokemonDetail";
 import Button from "../../elements/Button";
+import { CatchedContext } from "../../CatchedContext";
 
 const PokemonCard = (props) => {
+  const [catched, setCatched] = useState(false);
   const [actualPokemon, setActualPokemon] = useState({});
   const [sprites, setSprites] = useState({});
+  const [catchedPokemon, setCatchedPokemon] = useContext(CatchedContext);
+
+  const catchNewPokemon = (e) => {
+    e.preventDefault();
+    setCatched(true);
+    if (catchedPokemon != undefined) {
+      setCatchedPokemon([
+        ...catchedPokemon,
+        {
+          name: actualPokemon.name,
+          id: actualPokemon.id,
+          path: path,
+          sprite: sprites.front_default,
+        },
+      ]);
+    } else {
+      setCatchedPokemon([
+        {
+          name: actualPokemon.name,
+          id: actualPokemon.id,
+          path: path,
+          sprite: sprites.front_default,
+        },
+      ]);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -22,6 +50,14 @@ const PokemonCard = (props) => {
 
   const path = `/pokemon/${actualPokemon.id}`;
 
+  let catchButton;
+
+  if (!catched) {
+    catchButton = <Button onClick={catchNewPokemon}>Catch Pokemon</Button>;
+  } else {
+    catchButton = <Button>Already catched</Button>;
+  }
+
   return (
     <div className="cards" key={actualPokemon.id}>
       <b>{actualPokemon.name}</b>
@@ -29,12 +65,13 @@ const PokemonCard = (props) => {
       <img src={sprites.front_default} />
       <br></br>
 
-      <Button to={path}>
-        <Link
-          to={path}
-          render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
-        >{`Go see ${actualPokemon.name}`}</Link>
-      </Button>
+      <Link
+        to={path}
+        render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
+      >
+        <Button to={path}>Details</Button>
+      </Link>
+      {catchButton}
     </div>
   );
 };

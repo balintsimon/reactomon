@@ -5,7 +5,7 @@ import TypeElement from "./TypeElement";
 const TypeList = (props) => {
   return (
     <React.Fragment>
-      <TypeElement types={props.types} />
+      <TypeElement types={props.types} key={props.types.name} />
     </React.Fragment>
   );
 };

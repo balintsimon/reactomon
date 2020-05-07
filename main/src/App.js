@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import styled, { ThemeProvider } from "styled-components";
@@ -7,6 +7,8 @@ import Header from "./components/layout/Header";
 import PokemonList from "./components/pages/PokemonList";
 import TypeList from "./components/pages/TypeList";
 import PokemonDetail from "./components/pages/PokemonDetail";
+import { CatchedProvider } from "./CatchedContext";
+import CatchedPokemon from "./components/pages/CatchedPokemon";
 
 const theme = {
   primary: "#fff",
@@ -18,8 +20,8 @@ const theme = {
 };
 
 const App = () => {
-  const [pokemons, setPokemons] = useState({});
-  const [types, setTypes] = useState({});
+  const [pokemons, setPokemons] = useState([]);
+  const [types, setTypes] = useState([]);
 
   useEffect(() => {
     axios
@@ -34,39 +36,42 @@ const App = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <div className="App">
-          <div className="container">
-            <Header />
-            <Route
-              exact
-              path="/"
-              render={(props) => <React.Fragment>Hello</React.Fragment>}
-            />
-            <Route
-              path="/types"
-              render={(props) => (
-                <div style={cardStyle}>
-                  <TypeList types={types}>Hello</TypeList>
-                </div>
-              )}
-            />
+    <CatchedProvider>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <div className="App">
+            <div className="container">
+              <Header />
+              <Route
+                exact
+                path="/"
+                render={(props) => <React.Fragment>Hello</React.Fragment>}
+              />
+              <Route
+                path="/types"
+                render={(props) => (
+                  <div style={cardStyle}>
+                    <TypeList types={types}>Hello</TypeList>
+                  </div>
+                )}
+              />
 
-            <Route
-              exact
-              path="/pokemons"
-              render={(props) => (
-                <div style={cardStyle}>
-                  <PokemonList pokemons={pokemons} />
-                </div>
-              )}
-            />
-            <Route path="/pokemon/:id" children={<PokemonDetail />} />
+              <Route
+                exact
+                path="/pokemons"
+                render={(props) => (
+                  <div style={cardStyle}>
+                    <PokemonList pokemons={pokemons} key={pokemons} />
+                  </div>
+                )}
+              />
+              <Route path="/pokemon/:id" children={<PokemonDetail />} />
+              <Route path="/catched" children={<CatchedPokemon />} />
+            </div>
           </div>
-        </div>
-      </Router>
-    </ThemeProvider>
+        </Router>
+      </ThemeProvider>
+    </CatchedProvider>
   );
 };
 
