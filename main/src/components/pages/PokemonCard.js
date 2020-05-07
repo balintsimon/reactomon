@@ -15,7 +15,7 @@ const PokemonCard = (props) => {
   const catchNewPokemon = (e) => {
     e.preventDefault();
     setCatched(true);
-    if (catchedPokemon != undefined) {
+    if (catchedPokemon.length != 0) {
       setCatchedPokemon([
         ...catchedPokemon,
         {
@@ -53,25 +53,62 @@ const PokemonCard = (props) => {
   let catchButton;
 
   if (!catched) {
-    catchButton = <Button onClick={catchNewPokemon}>Catch Pokemon</Button>;
+    catchButton = (
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        onClick={catchNewPokemon}
+        style={{ textTransform: "uppercase" }}
+      >
+        Catch!
+      </button>
+    );
   } else {
-    catchButton = <Button>Already catched</Button>;
+    catchButton = (
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        style={{ textTransform: "uppercase" }}
+        disabled
+      >
+        Catched
+      </button>
+    );
   }
 
   return (
-    <div className="cards" key={actualPokemon.id}>
-      <b>{actualPokemon.name}</b>
+    <div
+      className="cards shadow-sm p-3 mb-5 bg-white rounded"
+      key={actualPokemon.id}
+    >
+      <h1 style={{ textTransform: "capitalize" }}>{actualPokemon.name}</h1>
       <br />
       <img src={sprites.front_default} />
       <br></br>
 
-      <Link
-        to={path}
-        render={(props) => <PokemonDetail actualPokemon={actualPokemon} />}
-      >
-        <Button to={path}>Details</Button>
-      </Link>
-      {catchButton}
+      <div class="container">
+        <div class="row">
+          <div class="col align-self-start">
+            <Link
+              to={path}
+              render={(props) => (
+                <PokemonDetail actualPokemon={actualPokemon} />
+              )}
+            >
+              <button
+                type="button"
+                class="btn btn-secondary"
+                to={path}
+                style={{ textTransform: "uppercase" }}
+              >
+                Details
+              </button>
+            </Link>
+          </div>
+          <div class="col align-self-end">{catchButton}</div>
+        </div>
+        <p></p>
+      </div>
     </div>
   );
 };

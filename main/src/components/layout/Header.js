@@ -25,8 +25,7 @@ export default function Header() {
       |{" "}
       <Link style={linkStyle} to="/catched">
         <Button>Catched</Button>
-      </Link>{" "}
-      | <ThemeSwitcher />
+      </Link>
     </Navbar>
   );
 }

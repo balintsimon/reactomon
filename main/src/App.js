@@ -39,34 +39,43 @@ const App = () => {
     <CatchedProvider>
       <ThemeProvider theme={theme}>
         <Router>
-          <div className="App">
-            <div className="container">
-              <Header />
-              <Route
-                exact
-                path="/"
-                render={(props) => <React.Fragment>Hello</React.Fragment>}
-              />
-              <Route
-                path="/types"
-                render={(props) => (
-                  <div style={cardStyle}>
-                    <TypeList types={types}>Hello</TypeList>
-                  </div>
-                )}
-              />
+          <div class="container" style={maxWidth}>
+            <div class="row">
+              <div class="col align-self-start">
+                <Header />
+              </div>
+              <div class="col-9">
+                <div className="App">
+                  <div className="container">
+                    <Header />
+                    <Route
+                      exact
+                      path="/"
+                      render={(props) => <React.Fragment>Hello</React.Fragment>}
+                    />
+                    <Route
+                      path="/types"
+                      render={(props) => (
+                        <div style={cardStyle}>
+                          <TypeList types={types}>Hello</TypeList>
+                        </div>
+                      )}
+                    />
 
-              <Route
-                exact
-                path="/pokemons"
-                render={(props) => (
-                  <div style={cardStyle}>
-                    <PokemonList pokemons={pokemons} key={pokemons} />
+                    <Route
+                      exact
+                      path="/pokemons"
+                      render={(props) => (
+                        <div style={cardStyle}>
+                          <PokemonList pokemons={pokemons} key={pokemons} />
+                        </div>
+                      )}
+                    />
+                    <Route path="/pokemon/:id" children={<PokemonDetail />} />
+                    <Route path="/catched" children={<CatchedPokemon />} />
                   </div>
-                )}
-              />
-              <Route path="/pokemon/:id" children={<PokemonDetail />} />
-              <Route path="/catched" children={<CatchedPokemon />} />
+                </div>
+              </div>
             </div>
           </div>
         </Router>
@@ -78,6 +87,10 @@ const App = () => {
 const cardStyle = {
   display: "flex",
   flexFlow: "row wrap",
+};
+
+const maxWidth = {
+  maxWidth: "3000px",
 };
 
 export default App;

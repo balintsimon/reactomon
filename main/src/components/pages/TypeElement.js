@@ -4,7 +4,7 @@ const TypeElement = (props) => {
   return props.types.map((type) => (
     <React.Fragment>
       <div
-        className="cards"
+        className="cards shadow-sm p-1 mb-1 bg-white rounded"
         key={type.url}
         name={type.name}
         data-url={type.url}
