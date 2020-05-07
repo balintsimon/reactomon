@@ -39,27 +39,26 @@ const App = () => {
     <CatchedProvider>
       <ThemeProvider theme={theme}>
         <Router>
-          <div class="container" style={maxWidth}>
-            <div class="row">
-              <div class="col align-self-start">
+          <div className="container" style={maxWidth}>
+            <div className="row">
+              <div className="col align-self-start">
                 <Header />
+                <img
+                  src={window.location.origin + "/icon.png"}
+                  style={{ maxWidth: "60%", padding: "10px" }}
+                />
               </div>
-              <div class="col-9">
+              <div className="col-9">
                 <div className="App">
                   <div className="container">
-                    <Header />
                     <Route
                       exact
                       path="/"
-                      render={(props) => <React.Fragment>Hello</React.Fragment>}
+                      children={<React.Fragment>Hello</React.Fragment>}
                     />
                     <Route
                       path="/types"
-                      render={(props) => (
-                        <div style={cardStyle}>
-                          <TypeList types={types}>Hello</TypeList>
-                        </div>
-                      )}
+                      render={(props) => <TypeList types={types}></TypeList>}
                     />
 
                     <Route

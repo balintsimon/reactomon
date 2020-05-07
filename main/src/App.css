@@ -1,5 +1,6 @@
 .cards {
   display: inline-block;
+  background-color: #777;
   width: 300px;
   text-align: center;
   border: 2px solid black;

@@ -24,15 +24,32 @@ const PokemonDetail = () => {
   }, []);
 
   return (
-    <div className="cards">
-      <img src={sprites.front_default} />
-      <p>
-        <b>{actualPokemon.name}</b>
-      </p>
-      <div>Id: {actualPokemon.id}</div>
-      <div>Height: {actualPokemon.height}</div>
-      <div>Weight: {actualPokemon.weight}</div>
-      <div>Base experience: {actualPokemon.base_experience}</div>
+    <div
+      class="card"
+      style={{
+        width: "18rem",
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
+        width: "40%",
+        marginTop: "20px",
+      }}
+    >
+      <img
+        class="card-img-top"
+        src={sprites.front_default}
+        alt="Card image cap"
+        style={{ background: "#eee" }}
+      ></img>
+      <div class="card-body">
+        <p class="card-text" style={{ textAlign: "center" }}>
+          <b>{actualPokemon.name}</b>
+          <div>Id: {actualPokemon.id}</div>
+          <div>Height: {actualPokemon.height}</div>
+          <div>Weight: {actualPokemon.weight}</div>
+          <div>Base experience: {actualPokemon.base_experience}</div>
+        </p>
+      </div>
     </div>
   );
 };
