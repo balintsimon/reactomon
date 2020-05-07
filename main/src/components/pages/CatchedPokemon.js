@@ -4,7 +4,6 @@ import { CatchedContext } from "../../CatchedContext";
 
 const CatchedPokemon = () => {
   const [catchedPokemon, setCatchedPokemon] = useContext(CatchedContext);
-  console.log(catchedPokemon.size);
 
   return catchedPokemon.length != 0 ? (
     catchedPokemon.map((actualPokemon) => (
