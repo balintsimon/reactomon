@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { CatchedContext } from "../CatchedPokemonContext";
-import PokemonCard from "./PokemonCard";
+import CatchedPokemonCard from "./CatchedPokemonCard";
 import H1 from "../element/H1";
 
 const CatchedPokemons = () => {
@@ -20,7 +20,7 @@ const CatchedPokemons = () => {
       </div>
     ) : (
       catchedPokemon.map((actualPokemon) => (
-        <PokemonCard pokemon={actualPokemon} key={actualPokemon.url} />
+        <CatchedPokemonCard pokemon={actualPokemon} key={actualPokemon.url} />
       ))
     );
 
@@ -31,7 +31,7 @@ const CatchedPokemons = () => {
           className="col-12 align-self-center"
           style={{ display: "flex", flexFlow: "row wrap" }}
         >
-          {content}
+          <div className="card-deck mb-4">{content}</div>
         </div>
       </div>
     </div>
