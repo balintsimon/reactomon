@@ -26,7 +26,7 @@ export default function CatchedPokemonCard(props) {
     <>
       <div
         id={actualPokemon.name}
-        className="card border-warning mb-3 clearfix"
+        className="card border-warning mb-3 mt-3 clearfix"
         style={{ width: "18rem" }}
       >
         {actualPokemon != null ? (
