@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <br />
-      <H1>{"Welcome to Pikatchu's home".toUpperCase()}</H1>
+      <H1>{"Welcome to Pikachu's home".toUpperCase()}</H1>
       <br />
 
       <div className="container" style={{ maxWidth: "3000px" }}>
