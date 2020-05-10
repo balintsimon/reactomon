@@ -7,7 +7,7 @@ const Pokemons2 = (props) => {
   let url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=9";
 
   const [pokemons, setPokemons] = useState(null);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [nextPageUrl, setNextPageUrl] = useState("");
 
   let nextPage = () => {
@@ -19,7 +19,7 @@ const Pokemons2 = (props) => {
 
   let previousPage = () => {
     if (pokemons.previous != null) {
-      setCount(count + 1);
+      setCount(count - 1);
       setNextPageUrl(pokemons.previous);
     }
   };
