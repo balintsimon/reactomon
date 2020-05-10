@@ -61,7 +61,7 @@ export default function PokemonCard(props) {
               class="btn btn-warning"
               onClick={catchNewPokemon}
             >
-              Catch!
+              {catchedPokemon.includes(actualPokemon) ? "Catched" : "Catch!"}
             </button>
             <button type="button " class="btn btn-light" onClick={setFlipCard}>
               Details
@@ -95,7 +95,7 @@ export default function PokemonCard(props) {
                 class="btn btn-warning"
                 onClick={catchNewPokemon}
               >
-                Catch!
+                {catchedPokemon.includes(actualPokemon) ? "Catched" : "Catch!"}
               </button>
               <button type="button" class="btn btn-light" onClick={setFlipCard}>
                 Main
