@@ -29,8 +29,13 @@ export default class Menu extends Component {
         >
           Pokemons
         </a>
-        <a id="contact" className="menu-item" href="/contact">
-          Contact
+        <a
+          id="contact"
+          className="menu-item"
+          href="/catched"
+          style={{ color: "red" }}
+        >
+          Catched Pokemons
         </a>
       </BurgerMenu>
     );
