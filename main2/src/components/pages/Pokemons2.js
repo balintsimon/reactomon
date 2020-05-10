@@ -6,14 +6,17 @@ import PokemonCard from "./PokemonCard";
 const Pokemons2 = (props) => {
   let url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=9";
 
-  const [count, setCount] = useState(0);
   const [pokemons, setPokemons] = useState(null);
+  const [count, setCount] = useState(0);
   const [nextPageUrl, setNextPageUrl] = useState("");
 
   let nextPage = () => {
-    setCount(count + 1);
-    setNextPageUrl(pokemons.next);
+    if (pokemons.next != null) {
+      setCount(count + 1);
+      setNextPageUrl(pokemons.next);
+    }
   };
+
   let previousPage = () => {
     if (pokemons.previous != null) {
       setCount(count + 1);
@@ -38,27 +41,50 @@ const Pokemons2 = (props) => {
 
   let backButton =
     pokemons != null ? (
-      pokemons.prveious !== null ? (
-        <button class={pokemons.previous} onClick={previousPage}>
-          Previous
-        </button>
+      pokemons.previous !== null ? (
+        <li className="page-item">
+          <a class="page-link" onClick={previousPage}>
+            Previous
+          </a>
+        </li>
       ) : (
-        <button disabled="true">Previous</button>
+        <li className="page-item" disabled>
+          <a class="page-link">Previous</a>
+        </li>
       )
     ) : (
-      <button disabled>Previous</button>
+      <div />
     );
+
+  let nextButton =
+    pokemons != null ? (
+      pokemons.next !== null ? (
+        <li className="page-item">
+          <a class="page-link" onClick={nextPage}>
+            Next
+          </a>
+        </li>
+      ) : (
+        <li className="page-item" disabled>
+          <a class="page-link">Next</a>
+        </li>
+      )
+    ) : (
+      <div />
+    );
+
+  let pagination = (
+    <nav aria-label="Page navigation example">
+      <ul className="pagination justify-content-end">
+        {backButton}
+        {nextButton}
+      </ul>
+    </nav>
+  );
 
   let page = (
     <div className="container">
-      {backButton}
-      {pokemons ? (
-        <button class={pokemons.next} onClick={nextPage}>
-          Next
-        </button>
-      ) : (
-        <div />
-      )}
+      {pagination}
       <div className="row">
         <div
           className="col-12 align-self-center"
