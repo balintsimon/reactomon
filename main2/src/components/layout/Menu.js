@@ -9,7 +9,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <BurgerMenu>
+      <BurgerMenu isOpen={false}>
         <img
           src={window.location.origin + "/icon.png"}
           height="100"
