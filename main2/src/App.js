@@ -5,7 +5,7 @@ import styled, { ThemeProvider } from "styled-components";
 
 import Menu from "./components/layout/Menu";
 import Home from "./components/pages/Home";
-import Pokemons from "./components/pages/Pokemons";
+import Pokemons2 from "./components/pages/Pokemons2";
 import BackgroundImage from "./components/element/BackgroundImage";
 
 import logo from "./logo.svg";
@@ -22,18 +22,23 @@ const theme = {
 };
 
 const App = () => {
+  document.title = "Pokemon app";
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <BackgroundImage
-          src={window.location.origin + "/pikatchu.png"}
-        ></BackgroundImage>
-        <Menu />
-        <Route exact path="/" component={Home} />
-        <Route path="/pokemons" component={Pokemons} />
-        <Route path="/types" />
-      </Router>
-    </ThemeProvider>
+    <div id="outer-container">
+      <BackgroundImage
+        src={window.location.origin + "/pikatchu.png"}
+      ></BackgroundImage>
+      <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
+      <main id="page-wrap">
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Route exact path="/" component={Home} />
+            <Route path="/pokemons" component={Pokemons2} />
+            <Route path="/types" />
+          </Router>
+        </ThemeProvider>
+      </main>
+    </div>
   );
 };
 

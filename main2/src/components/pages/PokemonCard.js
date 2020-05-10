@@ -4,7 +4,7 @@ import Get from "../../hook/Get";
 
 export default function PokemonCard(props) {
   let pokemon = props.pokemon;
-  const [isLoading, actualPokemon] = Get(pokemon.url);
+  const [isLoading, actualPokemon] = Get(pokemon.url, pokemon);
   const [isFlipped, setIsFlipped] = useState(false);
 
   let handleClick = (e) => {
