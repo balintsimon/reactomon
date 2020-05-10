@@ -26,24 +26,24 @@ const theme = {
 const App = () => {
   document.title = "Pokemon app";
   return (
-    <div id="outer-container">
-      <CatchedProvider>
+    <CatchedProvider>
+      <div id="outer-container">
         <BackgroundImage
           src={window.location.origin + "/pikatchu.png"}
         ></BackgroundImage>
-        <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
-        <main id="page-wrap">
-          <ThemeProvider theme={theme}>
-            <Router>
+        <Router>
+          <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
+          <main id="page-wrap">
+            <ThemeProvider theme={theme}>
               <Route exact path="/" component={Home} />
               <Route path="/pokemons" component={Pokemons2} />
               <Route path="/types" />
               <Route path="/catched" component={CatchedPokemons} />
-            </Router>
-          </ThemeProvider>
-        </main>
-      </CatchedProvider>
-    </div>
+            </ThemeProvider>
+          </main>
+        </Router>
+      </div>
+    </CatchedProvider>
   );
 };
 

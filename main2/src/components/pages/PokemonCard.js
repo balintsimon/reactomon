@@ -1,15 +1,51 @@
 import ReactCardFlip from "react-card-flip";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Get from "../../hook/Get";
+
+import { CatchedContext } from "../CatchedPokemonContext";
 
 export default function PokemonCard(props) {
   let pokemon = props.pokemon;
+
+  const [catched, setCatched] = useState(false);
   const [isLoading, actualPokemon] = Get(pokemon.url, pokemon);
   const [isFlipped, setIsFlipped] = useState(false);
 
-  let handleClick = (e) => {
+  const [catchedPokemon, setCatchedPokemon] = useContext(CatchedContext);
+
+  let setFlipCard = (e) => {
     e.preventDefault();
     isFlipped ? setIsFlipped(false) : setIsFlipped(true);
+  };
+
+  const catchNewPokemon = (e) => {
+    e.preventDefault();
+    console.log("catch pressed");
+
+    if (actualPokemon != null) {
+      console.log(catchedPokemon);
+      setCatched(true);
+      if (catchedPokemon.length != 0) {
+        setCatchedPokemon([
+          ...catchedPokemon,
+          {
+            name: actualPokemon.name,
+            id: actualPokemon.id,
+            path: actualPokemon.path,
+            sprite: actualPokemon.sprites.front_default,
+          },
+        ]);
+      } else {
+        setCatchedPokemon([
+          {
+            name: actualPokemon.name,
+            id: actualPokemon.id,
+            path: actualPokemon.path,
+            sprite: actualPokemon.sprites.front_default,
+          },
+        ]);
+      }
+    }
   };
 
   let mainCard = (
@@ -35,10 +71,14 @@ export default function PokemonCard(props) {
             bulk of the card's content.
           </p>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button " class="btn btn-warning">
+            <button
+              type="button "
+              class="btn btn-warning"
+              onClick={catchNewPokemon}
+            >
               Catch!
             </button>
-            <button type="button " class="btn btn-light" onClick={handleClick}>
+            <button type="button " class="btn btn-light" onClick={setFlipCard}>
               Details
             </button>
           </div>
@@ -65,10 +105,14 @@ export default function PokemonCard(props) {
             <h5 className="card-title">{pokemon.name.toUpperCase()}</h5>
             <p className="card-text">Height: {actualPokemon.height}</p>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-warning">
+              <button
+                type="button"
+                class="btn btn-warning"
+                onClick={catchNewPokemon}
+              >
                 Catch!
               </button>
-              <button type="button" class="btn btn-light" onClick={handleClick}>
+              <button type="button" class="btn btn-light" onClick={setFlipCard}>
                 Main
               </button>
             </div>

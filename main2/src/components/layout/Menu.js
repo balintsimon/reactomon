@@ -17,26 +17,26 @@ export default class Menu extends Component {
           className="menu-item"
           href="/"
         />
-        <a id="home" className="menu-item" href="/" style={{ color: "red" }}>
+        <Link id="home" className="menu-item" to="/" style={{ color: "red" }}>
           Home
-        </a>
-        <a
+        </Link>
+        <Link
           id="about"
           className="menu-item"
-          href="/pokemons"
+          to="/pokemons"
           url={"https://pokeapi.co/api/v2/pokemon?offset=0&limit=24"}
           style={{ color: "red" }}
         >
           Pokemons
-        </a>
-        <a
+        </Link>
+        <Link
           id="contact"
           className="menu-item"
-          href="/catched"
+          to="/catched"
           style={{ color: "red" }}
         >
           Catched Pokemons
-        </a>
+        </Link>
       </BurgerMenu>
     );
   }
