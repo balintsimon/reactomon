@@ -58,7 +58,7 @@ export default function PokemonCard(props) {
           <img
             className="card-img-top"
             src={actualPokemon.sprites.front_default}
-            style={{ background: "gold" }}
+            style={{ backgroundColor: "gold" }}
           />
 
           <div className="card-body">
