@@ -31,7 +31,7 @@ const CatchedPokemons = () => {
           className="col-12 align-self-center"
           style={{ display: "flex", flexFlow: "row wrap" }}
         >
-          <div className="card-deck mb-4">{content}</div>
+          <div className="card-deck mt-5 mb-5">{content}</div>
         </div>
       </div>
     </div>
