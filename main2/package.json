@@ -1,5 +1,5 @@
 {
-  "name": "main",
+  "name": "main2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,9 +11,8 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
+    "react-card-flip": "^1.0.10",
     "react-dom": "^16.13.1",
-    "react-inline-block": "^2.1.3",
-    "react-native": "^0.62.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0"

@@ -25,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10")
+      .get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=24")
       .then((res) => {
         setPokemons(res.data.results);
       });
@@ -39,34 +39,42 @@ const App = () => {
     <CatchedProvider>
       <ThemeProvider theme={theme}>
         <Router>
-          <div className="App">
-            <div className="container">
-              <Header />
-              <Route
-                exact
-                path="/"
-                render={(props) => <React.Fragment>Hello</React.Fragment>}
-              />
-              <Route
-                path="/types"
-                render={(props) => (
-                  <div style={cardStyle}>
-                    <TypeList types={types}>Hello</TypeList>
-                  </div>
-                )}
-              />
+          <div className="container" style={maxWidth}>
+            <div className="row">
+              <div className="col align-self-start">
+                <Header />
+                <img
+                  src={window.location.origin + "/icon.png"}
+                  style={{ maxWidth: "60%", padding: "10px" }}
+                />
+              </div>
+              <div className="col-9">
+                <div className="App">
+                  <div className="container">
+                    <Route
+                      exact
+                      path="/"
+                      children={<React.Fragment>Hello</React.Fragment>}
+                    />
+                    <Route
+                      path="/types"
+                      render={(props) => <TypeList types={types}></TypeList>}
+                    />
 
-              <Route
-                exact
-                path="/pokemons"
-                render={(props) => (
-                  <div style={cardStyle}>
-                    <PokemonList pokemons={pokemons} key={pokemons} />
+                    <Route
+                      exact
+                      path="/pokemons"
+                      render={(props) => (
+                        <div style={cardStyle}>
+                          <PokemonList pokemons={pokemons} key={pokemons} />
+                        </div>
+                      )}
+                    />
+                    <Route path="/pokemon/:id" children={<PokemonDetail />} />
+                    <Route path="/catched" children={<CatchedPokemon />} />
                   </div>
-                )}
-              />
-              <Route path="/pokemon/:id" children={<PokemonDetail />} />
-              <Route path="/catched" children={<CatchedPokemon />} />
+                </div>
+              </div>
             </div>
           </div>
         </Router>
@@ -78,6 +86,10 @@ const App = () => {
 const cardStyle = {
   display: "flex",
   flexFlow: "row wrap",
+};
+
+const maxWidth = {
+  maxWidth: "3000px",
 };
 
 export default App;

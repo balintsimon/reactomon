@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../elements/Navbar";
 import Button from "../../elements/Button";
+import ThemeSwitcher from "./ThemeSwitcher";
 import { CatchedContext } from "../../CatchedContext";
 
 export default function Header() {
