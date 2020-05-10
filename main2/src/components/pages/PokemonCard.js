@@ -22,28 +22,13 @@ export default function PokemonCard(props) {
     e.preventDefault();
     console.log("catch pressed");
 
-    if (actualPokemon != null) {
+    if (actualPokemon != null && !catchedPokemon.includes(actualPokemon)) {
       console.log(catchedPokemon);
       setCatched(true);
       if (catchedPokemon.length != 0) {
-        setCatchedPokemon([
-          ...catchedPokemon,
-          {
-            name: actualPokemon.name,
-            id: actualPokemon.id,
-            path: actualPokemon.path,
-            sprite: actualPokemon.sprites.front_default,
-          },
-        ]);
+        setCatchedPokemon([...catchedPokemon, actualPokemon]);
       } else {
-        setCatchedPokemon([
-          {
-            name: actualPokemon.name,
-            id: actualPokemon.id,
-            path: actualPokemon.path,
-            sprite: actualPokemon.sprites.front_default,
-          },
-        ]);
+        setCatchedPokemon([actualPokemon]);
       }
     }
   };
